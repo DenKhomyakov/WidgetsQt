@@ -43,9 +43,10 @@ Win::Win(QWidget *parent):QWidget(parent)
 
     begin();
 
-    connect(exitButton, SIGNAL(clicked(bool)), this, SLOT(close()));
-    connect(nextButton, SIGNAL(clicked(bool)), this, SLOT(begin()));
-    connect(inputEdit, SIGNAL(returnPressed()), this, SLOT(calc()));
+    connect(exitButton, &QPushButton::clicked, this, &Win::close);
+    connect(nextButton, &QPushButton::clicked, this, &Win::begin);
+    connect(inputEdit, &QLineEdit::returnPressed, this, &Win::calc);
+
 }
 
 void Win::begin()
