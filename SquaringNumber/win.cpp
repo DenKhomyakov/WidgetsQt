@@ -2,6 +2,7 @@
 
 #include <QVBoxLayout>
 #include <QMessageBox>
+#include <math.h>
 
 Win::Win(QWidget *parent):QWidget(parent)
 {
@@ -73,7 +74,14 @@ void Win::calc()
     QString str=inputEdit->text();
     a=str.toDouble(&Ok);
 
-    if (Ok)
+    bool bufferOverloaded = false;
+
+    if (abs(a) >= sqrt((3.4 * pow(10,38))))
+    {
+        bufferOverloaded = true;
+    }
+
+    if (Ok && !bufferOverloaded)
     {
         r=a*a;
 
@@ -90,7 +98,7 @@ void Win::calc()
         nextButton->setFocus();
     }
     else
-        if (!str.isEmpty())
+        if (!str.isEmpty() && !bufferOverloaded)
         {
             QMessageBox msgBox(QMessageBox::Information,
                            codec->toUnicode("Возведение в квадрат."),
@@ -98,4 +106,15 @@ void Win::calc()
                            QMessageBox::Ok);
             msgBox.exec();
         }
+        else
+        {
+            {
+                QMessageBox msgBox(QMessageBox::Information,
+                                   codec->toUnicode("Возведение в квадрат."),
+                                   codec->toUnicode("Слишком большое значение!"),
+                                   QMessageBox::Ok);
+                msgBox.exec();
+            }
+        }
+
 }
