@@ -1,6 +1,7 @@
 #ifndef WIN_H
 #define WIN_H
 
+#include <iostream>
 #include <QtGui>
 #include <QLineEdit>
 #include <QLabel>
@@ -11,8 +12,7 @@ class Counter:public QLineEdit
     Q_OBJECT
 
 public:
-    Counter(const QString & contents, QWidget *parent=0):
-        QLineEdit(contents,parent){}
+    Counter(const QString & contents, QWidget *parent=0) : QLineEdit(contents, parent){}
 
 signals:
     void tick_signal();
@@ -52,4 +52,3 @@ public:
 };
 
 #endif
-
