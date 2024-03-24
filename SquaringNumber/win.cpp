@@ -105,6 +105,8 @@ void Win::calc()
                            codec->toUnicode("Введено неверное значение."),
                            QMessageBox::Ok);
             msgBox.exec();
+
+            inputEdit->clear();
         }
         else
         {
@@ -114,7 +116,8 @@ void Win::calc()
                                    codec->toUnicode("Слишком большое значение!"),
                                    QMessageBox::Ok);
                 msgBox.exec();
+
+                inputEdit->clear();
             }
         }
-
 }
