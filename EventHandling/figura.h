@@ -11,7 +11,6 @@ protected:
     int halflen;
     int dx;
     int dy;
-    int r;
 
     virtual void draw(QPainter *Painter)=0;
 public:
