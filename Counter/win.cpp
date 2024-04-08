@@ -4,6 +4,8 @@
 
 Win::Win(QWidget *parent):QWidget(parent)
 {
+    try
+    {
     codec = QTextCodec::codecForName("utf-8");
 
     this->setWindowTitle(codec->toUnicode("Счётчик"));
@@ -16,35 +18,28 @@ Win::Win(QWidget *parent):QWidget(parent)
     calcbutton=new QPushButton("+1",this);
     exitbutton=new QPushButton(codec->toUnicode("Выход"),this);
 
-    if (!label1 || !label2 || !edit1 || !edit2 || !calcbutton || !exitbutton)
-    {
-        std::cerr<<"Memory allocation error!";
-    }
-
     QHBoxLayout *layout1 = new QHBoxLayout();
     QHBoxLayout *layout2 = new QHBoxLayout();
     QHBoxLayout *layout3 = new QHBoxLayout();
     QVBoxLayout *layout4 = new QVBoxLayout(this);
 
-    if (layout1 && layout2 && layout3 && layout4)
-    {
-        layout1->addWidget(label1);
-        layout1->addWidget(label2);
+    layout1->addWidget(label1);
+    layout1->addWidget(label2);
 
-        layout2->addWidget(edit1);
-        layout2->addWidget(edit2);
+    layout2->addWidget(edit1);
+    layout2->addWidget(edit2);
 
-        layout3->addWidget(calcbutton);
-        layout3->addWidget(exitbutton);
+    layout3->addWidget(calcbutton);
+    layout3->addWidget(exitbutton);
 
-        layout4->addLayout(layout1);
-        layout4->addLayout(layout2);
-        layout4->addLayout(layout3);
+    layout4->addLayout(layout1);
+    layout4->addLayout(layout2);
+    layout4->addLayout(layout3);
 
     }
-    else
+    catch (std::bad_alloc& exception)
     {
-        std::cerr<<"Memory allocation error!";
+    qDebug() << "Memory allocation error: " << exception.what();
     }
 
     edit1->setEnabled(false);
