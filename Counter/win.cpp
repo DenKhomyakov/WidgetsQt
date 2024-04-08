@@ -4,42 +4,46 @@
 
 Win::Win(QWidget *parent):QWidget(parent)
 {
-    try
-    {
-    codec = QTextCodec::codecForName("utf-8");
+    setWindowTitle("Счётчик");
 
-    this->setWindowTitle(codec->toUnicode("Счётчик"));
-    label1 = new QLabel(codec->toUnicode("Cчёт по 1"),this);
-    label2 = new QLabel(codec->toUnicode("Cчёт по 5"),this);
+    label1 = new QLabel("Счёт по 1",this);
+    label2 = new QLabel("Счёт по 5",this);
 
     edit1 = new Counter("0",this);
     edit2 = new Counter("0",this);
 
-    calcbutton=new QPushButton("+1",this);
-    exitbutton=new QPushButton(codec->toUnicode("Выход"),this);
+    calcbutton = new QPushButton("+1" , this);
+    exitbutton = new QPushButton("Выход",this);
+
+    if(!label1 || !label2 || !edit1 || !edit2 || !calcbutton || !exitbutton)
+    {
+        std::cerr << "Memory allocation error!";
+    }
 
     QHBoxLayout *layout1 = new QHBoxLayout();
     QHBoxLayout *layout2 = new QHBoxLayout();
     QHBoxLayout *layout3 = new QHBoxLayout();
     QVBoxLayout *layout4 = new QVBoxLayout(this);
 
-    layout1->addWidget(label1);
-    layout1->addWidget(label2);
+    if(layout1 && layout2 && layout3 && layout4)
+    {
+        layout1->addWidget(label1);
+        layout1->addWidget(label2);
 
-    layout2->addWidget(edit1);
-    layout2->addWidget(edit2);
+        layout2->addWidget(edit1);
+        layout2->addWidget(edit2);
 
-    layout3->addWidget(calcbutton);
-    layout3->addWidget(exitbutton);
+        layout3->addWidget(calcbutton);
+        layout3->addWidget(exitbutton);
 
-    layout4->addLayout(layout1);
-    layout4->addLayout(layout2);
-    layout4->addLayout(layout3);
+        layout4->addLayout(layout1);
+        layout4->addLayout(layout2);
+        layout4->addLayout(layout3);
 
     }
-    catch (std::bad_alloc& exception)
+    else
     {
-    qDebug() << "Memory allocation error: " << exception.what();
+        std::cerr << "Memory allocation error!";
     }
 
     edit1->setEnabled(false);
