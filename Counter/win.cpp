@@ -4,6 +4,8 @@
 
 Win::Win(QWidget *parent):QWidget(parent)
 {
+    codec = QTextCodec::codecForName("utf-8");
+
     setWindowTitle("Счётчик");
 
     label1 = new QLabel("Счёт по 1",this);
