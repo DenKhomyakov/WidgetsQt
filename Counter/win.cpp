@@ -9,13 +9,17 @@ Win::Win(QWidget *parent):QWidget(parent)
     setWindowTitle("Счётчик");
 
     label1 = new QLabel("Счёт по 1",this);
-    label2 = new QLabel("Счёт по 5",this);
+    //label2 = new QLabel("Счёт по 5",this);
+    label2 = nullptr;
 
-    edit1 = new Counter("0",this);
-    edit2 = new Counter("0",this);
+    //edit1 = new Counter("0",this);
+    edit1 = nullptr;
+    //edit2 = new Counter("0",this);
+    edit2 = nullptr;
 
     calcbutton = new QPushButton("+1" , this);
-    exitbutton = new QPushButton("Выход",this);
+    //exitbutton = new QPushButton("Выход",this);
+    exitbutton = nullptr;
 
     if(!label1 || !label2 || !edit1 || !edit2 || !calcbutton || !exitbutton)
     {
